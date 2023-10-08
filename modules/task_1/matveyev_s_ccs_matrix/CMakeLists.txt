@@ -1,6 +1,5 @@
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-
 if ( USE_SEQ )
     set(ProjectId "${ProjectId}_seq")
     project( ${ProjectId} )
@@ -14,6 +13,7 @@ if ( USE_SEQ )
     add_executable( ${ProjectId} ${ALL_SOURCE_FILES} )
 
     target_link_libraries(${ProjectId} ${PACK_LIB})
+    target_link_directories(${ProjectId} PUBLIC ${CMAKE_BINARY_DIR}/googletest-install/lib)
     target_link_libraries(${ProjectId} gtest gtest_main)
 
     enable_testing()
@@ -27,10 +27,10 @@ if ( USE_SEQ )
             endif ()
         endforeach ()
 
-        find_program(CPPCHECK cppcheck)
+        find_program(CPPCHECK_EXEC cppcheck)
         add_custom_target(
                 "${ProjectId}_cppcheck" ALL
-                COMMAND ${CPPCHECK}
+                COMMAND ${CPPCHECK_EXEC}
                 --enable=warning,performance,portability,information,missingInclude
                 --language=c++
                 --std=c++11

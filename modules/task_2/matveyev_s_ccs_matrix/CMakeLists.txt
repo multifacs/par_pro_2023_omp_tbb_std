@@ -1,6 +1,5 @@
 get_filename_component(ProjectId ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-
 if ( USE_OMP )
     set(ProjectId "${ProjectId}_omp")
     project( ${ProjectId} )
@@ -14,7 +13,9 @@ if ( USE_OMP )
     add_executable( ${ProjectId} ${ALL_SOURCE_FILES} )
 
     target_link_libraries(${ProjectId} ${PACK_LIB})
+    target_link_directories(${ProjectId} PUBLIC ${CMAKE_BINARY_DIR}/googletest-install/lib)
     target_link_libraries(${ProjectId} gtest gtest_main)
+    target_link_libraries(${ProjectId} ${OpenMP_libomp_LIBRARY})
 
     enable_testing()
     add_test(NAME ${ProjectId} COMMAND ${ProjectId})
@@ -27,10 +28,10 @@ if ( USE_OMP )
             endif ()
         endforeach ()
 
-        find_program(CPPCHECK cppcheck)
+        find_program(CPPCHECK_EXEC cppcheck)
         add_custom_target(
                 "${ProjectId}_cppcheck" ALL
-                COMMAND ${CPPCHECK}
+                COMMAND ${CPPCHECK_EXEC}
                 --enable=warning,performance,portability,information,missingInclude
                 --language=c++
                 --std=c++11
