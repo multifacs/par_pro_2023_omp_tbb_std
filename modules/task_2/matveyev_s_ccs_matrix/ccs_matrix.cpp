@@ -1,5 +1,5 @@
-// Copyright 2023 Matveev Sergey
-#include "../../task_2/matveyev_s_ccs_matrix/ccs_matrix.h"
+// Copyright 2023 Matveyev Sergey
+#include "../../../modules/task_2/matveyev_s_ccs_matrix/ccs_matrix.h"
 
 #include <omp.h>
 double* create_random_matrix(int size_n) {

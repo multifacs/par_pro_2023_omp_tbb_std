@@ -1,4 +1,4 @@
-// Copyright 2023 Matveev Sergey
+// Copyright 2023 Matveyev Sergey
 #include "../../../modules/task_1/matveyev_s_ccs_matrix/ccs_matrix.h"
 double* create_random_matrix(int size_n) {
   std::random_device dev;

@@ -1,17 +1,17 @@
-// Copyright 2023 Matveev Sergey
+// Copyright 2023 Matveyev Sergey
 #include <gtest/gtest.h>
 #include <omp.h>
 
 #include "../../../modules/task_2/matveyev_s_ccs_matrix/ccs_matrix.h"
 
-TEST(CCS_MATRIX_MULT_SEQ, CREATE_MATRIX) {
+TEST(CCS_MATRIX_MULT_OMP, CREATE_MATRIX) {
   double* arr = create_random_matrix(4);
   SparseMatrix A(arr, 2, 2);
   SparseMatrix B(arr, 2, 2);
   ASSERT_EQ(1, 1);
 }
 
-TEST(CCS_MATRIX_MULT_SEQ, TRANSPOSE) {
+TEST(CCS_MATRIX_MULT_OMP, TRANSPOSE) {
   double arr[] = {1, 0, 0, 2};
   double arr2[] = {0, 3, 7, 0};
   double arr3[] = {0, 3, 14, 0};
@@ -21,7 +21,7 @@ TEST(CCS_MATRIX_MULT_SEQ, TRANSPOSE) {
   ASSERT_EQ(C, A * B);
 }
 
-TEST(CCS_MATRIX_MULT_SEQ, MULT_1) {
+TEST(CCS_MATRIX_MULT_OMP, MULT_1) {
   double ptr1[] = {0, 5, 0, 0, 1, 0, 3, 0, 8};
   double ptr2[] = {1, 0, 0, 0, 0, 1, 0, 0, 4};
   double ptr3[] = {0, 0, 5, 0, 0, 1, 3, 0, 32};
@@ -31,7 +31,7 @@ TEST(CCS_MATRIX_MULT_SEQ, MULT_1) {
   ASSERT_EQ(C == A * B, true);
 }
 
-TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
+TEST(SPARSE_MATRIX_MULT_OMP, MULT_2) {
   int count = 100;
   double* ptr1 = create_random_matrix(count * count);
   double* ptr2 = create_random_matrix(count * count);
@@ -53,7 +53,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_2) {
   ASSERT_EQ(D, C);
 }
 
-TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
+TEST(SPARSE_MATRIX_MULT_OMP, MULT_3) {
   int count = 120;
   double* ptr1 = create_random_matrix(count * count);
   double* ptr2 = create_random_matrix(count * count);
@@ -74,7 +74,7 @@ TEST(SPARSE_MATRIX_MULT_SEQ, MULT_3) {
   // std::cout << "a: " << seq_time / omp_time << "\n";
   ASSERT_EQ(D, C);
 }
-TEST(SPARSE_MATRIX_MULT_SEQ, MULT_4) {
+TEST(SPARSE_MATRIX_MULT_OMP, MULT_4) {
   int count = 150;
   double* ptr1 = create_random_matrix(count * count);
   double* ptr2 = create_random_matrix(count * count);
