@@ -34,13 +34,14 @@ SparseMatrix::SparseMatrix(double* arr, int _rows, int _cols) {
   }
   column_idx.push_back(num);
 }
-SparseMatrix::SparseMatrix(const SparseMatrix& lhs) {
-  rows = lhs.rows;
-  cols = lhs.cols;
-  column_idx = lhs.column_idx;
-  row_nums = lhs.row_nums;
-  values = lhs.values;
-}
+
+SparseMatrix::SparseMatrix(const SparseMatrix& lhs)
+    : rows(lhs.rows),
+      cols(lhs.cols),
+      column_idx(lhs.column_idx),
+      row_nums(lhs.row_nums),
+      values(lhs.values) {}
+
 SparseMatrix& SparseMatrix::operator=(const SparseMatrix& lhs) {
   if (this == &lhs) return (*this);
   rows = lhs.rows;
